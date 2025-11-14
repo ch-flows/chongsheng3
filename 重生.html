@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.3, maximum-scale=5.0, user-scalable=yes" />
+  <title>重生 · 英语</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap');
+    
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a67d8;
+      --primary-light: #a3bffa;
+      --secondary: #ed8936;
+      --accent: #48bb78;
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f7fafc;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.04);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+      min-height: 100%;
+      width: 100%;
+      font-family: 'Inter', 'Noto Serif SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: auto;
+      touch-action: manipulation;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+    .background-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(135deg, #667eea 0%, #764ba2 100%),
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+      gap: 16px;
+      min-height: auto;
+      height: auto;
+      flex: 0 1 auto;
+      margin: auto;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+      transform-origin: center center;
+      transition: transform 0.3s ease;
+      background: transparent;
+    }
+
+    .header {
+      text-align: center;
+      width: 100%;
+      padding: 8px 0;
+      margin-bottom: 4px;
+      transition: var(--transition);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      font-family: 'Noto Serif SC', serif;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .motto {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 3px;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .motto-english {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .card-container {
+      width: 100%;
+      height: 200px;
+      touch-action: pan-y pinch-zoom;
+      position: relative;
+      margin: 12px 0;
+    }
+
+    #card {
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(
+          90deg, 
+          var(--primary) 0%, 
+          #7c6eea 20%, 
+          var(--secondary) 50%, 
+          #f6ad55 80%, 
+          var(--accent) 100%
+        ) top / 100% 12px no-repeat,
+        rgba(255, 255, 255, 0.97) 0% 12px / 100% calc(100% - 12px) no-repeat;
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    #card:active {
+      transform: translateY(-3px) scale(0.995);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    #card-text {
+      font-size: 20px;
+      line-height: 1.5;
+      word-break: break-word;
+      font-weight: 600;
+      color: var(--text-primary);
+      -webkit-user-select: none;
+      user-select: none;
+      white-space: pre-line;
+      font-family: 'Noto Serif SC', serif;
+      padding: 0 8px;
+      -webkit-user-select: text;
+      user-select: text;
+      max-width: 100%;
+    }
+
+    #star {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 18px;
+      color: #e2e8f0;
+      transition: var(--transition);
+      cursor: pointer;
+      z-index: 10;
+      padding: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+      -webkit-user-select: none;
+      user-select: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #star:active {
+      transform: scale(1.2);
+    }
+
+    #star.active {
+      color: var(--secondary);
+      filter: drop-shadow(0 0 12px rgba(237, 137, 54, 0.5));
+      animation: starPulse 2s infinite;
+    }
+
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .progress-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 8px 0;
+    }
+
+    #progress {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 300;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-light) 0%, white 100%);
+      border-radius: 4px;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: shimmer 2.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .controls {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 8px 0;
+      margin-top: 12px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      height: 48px;
+      min-width: 56px;
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(15px);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      padding: 0 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:active::before {
+      opacity: 1;
+    }
+
+    .btn:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .btn-icon {
+      font-size: 18px;
+      transition: var(--transition);
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+      font-weight: 300;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* 重置按钮的SVG图标样式 */
+    .reset-icon-svg {
+      width: 20px;
+      height: 20px;
+      fill: rgba(255, 255, 255, 0.85);
+      stroke: none;
+    }
+
+    .reset-icon-svg rect {
+      width: 1.2px;
+      height: 8px;
+      y: 8;
+    }
+
+    .btn-text {
+      display: none;
+    }
+
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* 缩放控制按钮 */
+    .zoom-controls {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      z-index: 1000;
+    }
+
+    .zoom-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      border: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .zoom-btn:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .zoom-indicator {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 16px;
+      font-size: 12px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 响应式样式 */
+    @media (max-width: 360px) {
+      .app-container {
+        padding: 16px 12px;
+        gap: 14px;
+      }
+      
+      .logo {
+        font-size: 22px;
+      }
+      
+      .motto {
+        font-size: 10px;
+      }
+      
+      .motto-english {
+        font-size: 9px;
+      }
+      
+      .card-container {
+        height: 190px;
+      }
+      
+      #card-text {
+        font-size: 18px;
+      }
+      
+      .btn {
+        height: 46px;
+      }
+      
+      .btn-icon {
+        font-size: 16px;
+      }
+      
+      .reset-icon-svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .zoom-controls {
+        bottom: 10px;
+        right: 10px;
+        gap: 2px;
+      }
+      
+      .zoom-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: 300;
+      }
+      
+      .zoom-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 11px;
+        padding: 5px 8px;
+      }
+      
+      #progress {
+        font-weight: 300;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      html, body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+        justify-content: flex-start;
+      }
+      
+      .app-container {
+        max-width: 90%;
+        width: 90%;
+        padding: 30px 20px;
+        gap: 20px;
+        transform: none !important;
+        flex: 0 1 auto;
+        margin: 20px auto;
+        min-height: auto;
+      }
+      
+      .header {
+        padding: 15px 0;
+        margin-bottom: 10px;
+      }
+      
+      .logo {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+      
+      .motto {
+        font-size: 14px;
+      }
+      
+      .motto-english {
+        font-size: 13px;
+      }
+      
+      .card-container {
+        height: 250px;
+        margin: 15px 0;
+      }
+      
+      #card {
+        padding: 30px 25px;
+      }
+      
+      #card-text {
+        font-size: 24px;
+        padding: 0 15px;
+      }
+      
+      #star {
+        top: 18px;
+        left: 18px;
+        font-size: 22px;
+        padding: 8px;
+        width: 38px;
+        height: 38px;
+      }
+      
+      .progress-container {
+        margin: 12px 0;
+      }
+      
+      #progress {
+        font-size: 15px;
+        margin-bottom: 8px;
+        font-weight: 300;
+      }
+      
+      .progress-bar {
+        height: 6px;
+      }
+      
+      .controls {
+        gap: 15px;
+        padding: 12px 0;
+        margin-top: 15px;
+      }
+      
+      .btn-row {
+        gap: 12px;
+      }
+      
+      .btn {
+        height: 55px;
+        min-width: 65px;
+        padding: 0 12px;
+      }
+      
+      .btn-icon {
+        font-size: 22px;
+        font-weight: 300;
+      }
+      
+      .reset-icon-svg {
+        width: 22px;
+        height: 22px;
+      }
+      
+      .zoom-controls {
+        bottom: 20px;
+        right: 20px;
+        gap: 2px;
+      }
+      
+      .zoom-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: 300;
+      }
+      
+      .zoom-indicator {
+        top: 20px;
+        right: 20px;
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .app-container {
+        max-width: 700px;
+        padding: 40px 50px;
+        gap: 24px;
+      }
+      
+      .header {
+        padding: 16px 0;
+        margin-bottom: 12px;
+      }
+      
+      .logo {
+        font-size: 42px;
+        margin-bottom: 10px;
+      }
+      
+      .motto {
+        font-size: 18px;
+      }
+      
+      .motto-english {
+        font-size: 16px;
+      }
+      
+      .card-container {
+        height: 320px;
+        margin: 20px 0;
+      }
+      
+      #card {
+        padding: 50px 45px;
+        border-radius: 28px;
+      }
+      
+      #card-text {
+        font-size: 32px;
+        padding: 0 16px;
+      }
+      
+      #star {
+        top: 24px;
+        left: 24px;
+        font-size: 28px;
+        padding: 10px;
+        width: 48px;
+        height: 48px;
+      }
+      
+      .progress-container {
+        margin: 16px 0;
+      }
+      
+      #progress {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+      
+      .progress-bar {
+        height: 8px;
+      }
+      
+      .controls {
+        gap: 20px;
+        padding: 16px 0;
+        margin-top: 20px;
+      }
+      
+      .btn-row {
+        gap: 16px;
+      }
+      
+      .btn {
+        height: 68px;
+        min-width: 90px;
+        padding: 0 16px;
+        border-radius: 22px;
+      }
+      
+      .btn-icon {
+        font-size: 28px;
+        font-weight: 300;
+      }
+      
+      .reset-icon-svg {
+        width: 26px;
+        height: 26px;
+      }
+      
+      .zoom-controls {
+        bottom: 25px;
+        right: 25px;
+        gap: 2px;
+      }
+      
+      .zoom-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        font-weight: 300;
+      }
+      
+      .zoom-indicator {
+        top: 25px;
+        right: 25px;
+        font-size: 16px;
+        padding: 10px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 固定的背景层 -->
+  <div class="background-fixed"></div>
+  
+  <!-- 缩放指示器 -->
+  <div class="zoom-indicator" id="zoomIndicator">100%</div>
+  
+  <!-- 缩放控制按钮 -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoomOutBtn">-</button>
+    <button class="zoom-btn" id="zoomInBtn">+</button>
+  </div>
+  
+  <div class="app-container" id="appContainer">
+    <div class="header">
+      <div class="logo">重生 · 英语</div>
+      <div class="motto">不是背，是让它长进气息，成为你自己的呼吸。</div>
+      <div class="motto-english">Not memorized. Grown into your breath.</div>
+    </div>
+    
+    <div class="card-container">
+      <div id="card">
+        <div id="star">★</div>
+        <div id="card-text">当接到指示时</div>
+        <!-- 已移除语言指示器 -->
+      </div>
+    </div>
+    
+    <div class="progress-container">
+      <div id="progress">1 / 550</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 0.2%"></div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <div class="btn-row">
+        <button class="btn" id="resetBtn" title="回到第一张">
+          <div class="btn-content">
+            <svg class="reset-icon-svg" viewBox="0 0 24 24">
+              <rect x="3" y="8" width="1.2" height="8" fill="currentColor"/>
+              <polygon points="10,8 6,12 10,16" fill="currentColor"/>
+              <polygon points="16,8 12,12 16,16" fill="currentColor"/>
+            </svg>
+          </div>
+        </button>
+        <button class="btn" id="shuffleBtn" title="随机排序">
+          <div class="btn-content">
+            <span class="btn-icon">⇄</span>
+          </div>
+        </button>
+        <button class="btn" id="starBtn" title="收藏">
+          <div class="btn-content">
+            <span class="btn-icon">★</span>
+          </div>
+        </button>
+        <button class="btn" id="bookmarksBtn" title="查看收藏">
+          <div class="btn-content">
+            <span class="btn-icon">🔖</span>
+          </div>
+        </button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="prevBtn" title="上一张">
+          <div class="btn-content">
+            <span class="btn-icon">←</span>
+          </div>
+        </button>
+        <button class="btn btn-primary" id="nextBtn" title="下一张">
+          <div class="btn-content">
+            <span class="btn-icon">→</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 完整的英语短语数据（275个短语）
+    const englishPhrases = [
+      ["当接到指示时", "when instructed"],
+      ["如果可能的话", "if possible"],
+      ["千万别小看这个方法", "never underestimate this method"],
+      ["我完全支持", "i'm all for it"],
+      ["这需要勇气", "that took courage"],
+      ["话虽如此，……", "having said that, …"],
+      ["完全可以理解", "it's completely understandable"],
+      ["这得看具体情境", "it depends on the context"],
+      ["直译/字面翻译", "a literal translation"],
+      ["在特定的语境", "in a specific context"],
+      ["把口香糖吐出来", "spit out the gum"],
+      ["严格说来番茄是水果", "technically a tomato is a fruit"],
+      ["你说得有道理", "that makes sense"],
+      ["那一定很难熬", "that must be really tough"],
+      ["你不可理喻", "you're impossible"],
+      ["别逼我发火", "don't test my patience"],
+      ["别太在意", "don't take it to heart"],
+      ["我有一个条件", "i have one condition"],
+      ["都交给我吧", "leave it all to me"],
+      ["别惹她生气", "don't make her angry"],
+      ["只是想激励你", "just to motivate you"],
+      ["不要打扰到别人", "don't disturb others"],
+      ["你行的", "you've got this"],
+      ["办法总比问题多", "there's always a way"],
+      ["我们就能得分了", "we can score"],
+      ["我们时间不多了", "we don't have much time"],
+      ["能开阔眼界", "can broaden your horizons"],
+      ["完全出乎我的意料", "completely beyond my expectations"],
+      ["这是把双刃剑", "it's a double-edged sword"],
+      ["这是一个很高的评价", "that's a really high compliment"],
+      ["他们没按好心", "they're up to no good"],
+      ["他们笑得太假了", "that smile wasn't genuine"],
+      ["比我预期的要好", "better than i expected"],
+      ["真的值得吗", "is it really worth it"],
+      ["目前的情况", "the current situation"],
+      ["不怪别人", "no one else is to blame"],
+      ["直接和她谈", "talk to her directly"],
+      ["进入决赛", "reaching the finals"],
+      ["我喜欢听你讲", "i enjoy listening to you"],
+      ["我明白你的意思", "i see what you mean"],
+      ["别不当回事", "don't take it lightly"],
+      ["别太较真", "don't take it too seriously"],
+      ["这次就算了", "i'll let it go this time"],
+      ["但下不为例", "but don't let it happen again"],
+      ["情况严重了", "the situation has gotten serious"],
+      ["有个思想准备吧", "be mentally prepared"],
+      ["是时候放下过去了", "it's time to move on"],
+      ["交给你，我很放心", "i'm confident leaving this to you"],
+      ["几乎没睡觉", "barely slept"],
+      ["我一直没弄明白", "i still can't figure it out"],
+      ["兑现我们的承诺", "deliver on our promises"],
+      ["这个座位有人坐吗", "is this seat taken"],
+      ["有两下子", "you've got some skills"],
+      ["转念一想", "on second thought"],
+      ["我可没这么说", "i didn't say that"],
+      ["不要胡乱回答", "don't give random answers"],
+      ["别拿我开玩笑", "don't make fun of me"],
+      ["他们没有恶意", "they mean no harm"],
+      ["更侧重于质量", "more focused on quality"],
+      ["你没有看到吗", "didn't you see that"],
+      ["好过没有", "better than nothing"],
+      ["这招挺管用", "this trick works pretty well"],
+      ["在截止日前", "before the deadline"],
+      ["问题可能会恶化", "the problem could get worse"],
+      ["可能会出现副作用", "side effects may occur"],
+      ["是件了不起的事", "was a big deal"],
+      ["他只想着自己", "only cares about himself"],
+      ["你能站在我的立场想吗", "can you put yourself in my shoes"],
+      ["事情的来龙去脉", "the whole story"],
+      ["别急着下结论", "don't jump to conclusions"],
+      ["只是片面的说法", "just one side of it"],
+      ["我知道你很用心", "i know you really care"],
+      ["这对我很重要", "it means a lot to me"],
+      ["所以你才会难过", "that's why you're upset"],
+      ["不想争下去了", "don't want to keep arguing"],
+      ["我很感激", "i really appreciate that"],
+      ["我无所谓了", "i don't mind"],
+      ["你决定吧", "up to you"],
+      ["他睁一只眼闭一只眼", "he turns a blind eye"],
+      ["估计出啥事儿了", "reckon something's up"],
+      ["那就是故意挑事", "that's just ragebait"],
+      ["别上钩", "don't fall for it"],
+      ["通读一遍全文", "read through the whole text"],
+      ["可能会有风险", "it could be risky"],
+      ["太过纠结于细节", "too focused on small details"],
+      ["忽略了全局", "not seeing the big picture"],
+      ["就在当天下午", "that very afternoon"],
+      ["我们上午见面了", "we met in the morning"],
+      ["这事别指望他", "don't count on him for this"],
+      ["他思路清晰", "he's very logical"],
+      ["他总能讲出道理来", "he always makes sense"],
+      ["我没有异议", "i have no objection"],
+      ["并没有那么难", "it's not that difficult"],
+      ["她泪流满面", "she burst into tears"],
+      ["简单说几句", "just a few quick words"],
+      ["和以前相比", "compared to before"],
+      ["差点没认出你来", "almost didn't recognize you"],
+      ["时间多的是", "he's got plenty of time"],
+      ["恢复了正常", "returned to normal"],
+      ["他假装没事", "he pretended to be fine"],
+      ["别这么说", "don't say that"],
+      ["你说是就是吧", "if you say so"],
+      ["从来没听说过", "never heard of it"],
+      ["疼死了", "it hurt a lot"],
+      ["毫无疑问", "without a doubt"],
+      ["如果一切顺利的话", "if all goes well"],
+      ["你好大的胆子", "how dare you"],
+      ["你弄疼我了", "you're hurting me"],
+      ["够了，别再说了", "i've heard enough"],
+      ["会溅出来的", "it'll splash"],
+      ["过来吃点", "come and have some"],
+      ["刚开始很难", "it was hard at first"],
+      ["你看起来心事重重", "you look worried"],
+      ["最好别冒险", "better not to risk it"],
+      ["听起来有点乱", "it sounds confusing"],
+      ["别管细节了", "forget the details"],
+      ["理智一点吧", "please be sensible"],
+      ["这可是你说的", "you said it yourself"],
+      ["你总是随大流", "you always follow the crowd"],
+      ["专注于目标", "stay focused on your goals"],
+      ["那就含糊点回答", "then just keep it vague"],
+      ["完全没有察觉", "didn't notice at all"],
+      ["很容易被误导", "can be easily misled"],
+      ["说够了吧", "enough said"],
+      ["好险啊", "that was close"],
+      ["跟大家说一声", "keeping you all in the loop"],
+      ["真的没什么大不了的", "it's no big deal"],
+      ["结果后悔了", "ended up regretting it"],
+      ["你反应过度了", "you're overreacting"],
+      ["给我一点时间", "give me a second"],
+      ["我来处理", "let me handle it"],
+      ["自取其辱", "make a fool of yourself"],
+      ["言行不一", "say one thing and do another"],
+      ["我很期待", "i'm looking forward to it"],
+      ["问题不在这里", "this isn't the issue"],
+      ["还没弄好呢", "it's not ready yet"],
+      ["那只是你的偏见", "that's just your bias"],
+      ["还在考虑", "still thinking about it"],
+      ["这个也需要回答", "this one also needs a response"],
+      ["失败没什么大不了的", "failure is no big deal"],
+      ["也是要不得的", "that's also unacceptable"],
+      ["你太过理性了", "you're being too logical"],
+      ["你又钻牛角尖了", "here you go overthinking again"],
+      ["不妨一试", "why not give it a try"],
+      ["这也太严了吧", "that's way too strict"],
+      ["太不近人情了", "that's so inconsiderate"],
+      ["通融一下呗", "cut me some slack"],
+      ["聊得很投机", "we really hit it off"],
+      ["这个选择是最明智的", "this choice is the wisest"],
+      ["生活充满变数", "life is full of uncertainties"],
+      ["生活总有起伏", "life has its ups and downs"],
+      ["机会稍纵即逝", "opportunities come and go"],
+      ["你很有上进心", "you are highly motivated"],
+      ["没有人天生就厉害", "no one is born great"],
+      ["一切皆有可能", "anything is possible"],
+      ["你的努力不会白费", "your hard work will pay off"],
+      ["挑战你的极限", "test your limits"],
+      ["需要有人站出来", "need someone to step up"],
+      ["你怎么不吃", "how come you're not eating"],
+      ["保持开放心态", "maintain an open mind"],
+      ["乍一听很奇怪", "it sounds weird at first"],
+      ["我才意识到", "i just realized"],
+      ["不太 / 算不上", "not really"],
+      ["你完全跑题了", "you're way off topic"],
+      ["我不信", "i'm not buying it"],
+      ["出发点是好的", "the intention was good"],
+      ["我没问题", "that works for me"],
+      ["那件事我做不到", "that's not something i can do"],
+      ["这事我稍后再答复你", "i'll get back to you on that"],
+      ["这事坚决不行", "that's a hard no"],
+      ["别慌", "let's not panic"],
+      ["在我看来，……", "from my perspective, …"],
+      ["那不是我喜欢的", "that's not my cup of tea"],
+      ["说起来容易做起来难", "easier said than done"],
+      ["慢慢来，不着急", "take your time"],
+      ["我在这儿支持你", "i'm here for you"],
+      ["你不是一个人面对", "you're not alone in this"],
+      ["你可以这样想", "think of it this way"],
+      ["这是颠覆性的", "that's a game-changer"],
+      ["我们换个角度看看", "let's look at this differently"],
+      ["这话有一定道理", "there's some truth in that"],
+      ["我理解你的出发点", "i see where you're coming from"],
+      ["你越过了我的底线", "you crossed my boundary"],
+      ["我还是不了", "i'd rather not"],
+      ["这不是我的责任", "that's not on me"],
+      ["我有权说\"不\"", "i have every right to say no"],
+      ["别道德绑架我", "don't guilt-trip me"],
+      ["请别再提这件事了", "please drop it"],
+      ["我不会改变主意", "i'm not changing my mind"],
+      ["这不符合我的原则", "that goes against my values"],
+      ["我拒绝参与", "i'm opting out"],
+      ["别试探我的底线", "don't test my limits"],
+      ["我不接受这种语气", "i won't accept that tone"],
+      ["我不想卷入这件事", "i don't want to get involved"],
+      ["这对我是一种冒犯", "that feels offensive to me"],
+      ["这不是我能妥协的地方", "this is non-negotiable for me"],
+      ["我不会容忍这种行为", "i won't tolerate this behavior"],
+      ["认真对待我的感受", "take my feelings seriously"],
+      ["我洗耳恭听", "i'm all ears"],
+      ["需要我做点什么吗", "is there anything i can do"],
+      ["别太苛刻地对待自己", "don't be so hard on yourself"],
+      ["你的努力我看到了", "i see how hard you're trying"],
+      ["这不是你的错", "this isn't your fault"],
+      ["我们一起想办法", "we'll figure it out together"],
+      ["我相信你的判断", "i trust your judgment"],
+      ["在人群中脱颖而出", "stand out from the crowd"],
+      ["我为你感到骄傲", "i'm proud of you"],
+      ["权衡利弊之后，……", "after weighing the pros and cons, …"],
+      ["真正重要的是……", "what truly matters is…"],
+      ["不过，我想补充一点……", "however, i'd like to add…"],
+      ["从另一个角度看，……", "from another angle, …"],
+      ["我们来探讨这个想法", "let's explore that idea"],
+      ["我换个说法", "let me rephrase that"],
+      ["这不是针对你", "it's not personal"],
+      ["让我们先澄清一下事实", "let's clarify the facts first"],
+      ["我同意你的部分观点", "i agree with part of what you're saying"],
+      ["不过，数据告诉我们……", "however, the data suggests…"],
+      ["这个假设可能不成立", "that assumption might not hold"],
+      ["这和实际情况有些出入", "that doesn't quite match reality"],
+      ["你说得对，但……", "you're right, but…"],
+      ["我们或许忽略了某个关键点", "we might be missing a key point"],
+      ["这个类比不太恰当", "that analogy doesn't quite work"],
+      ["让我们回到核心问题", "let's get back to the core issue"],
+      ["我不完全同意", "i don't fully agree"],
+      ["尽管遇到了挫折", "despite the setback"],
+      ["我们的目标是一致的", "we're on the same page about the goal"],
+      ["重点不是谁对谁错，而是怎么解决", "it's not about who's right—it's about how to fix it"],
+      ["我们分步骤来", "let's take it step by step"],
+      ["需要简化流程", "should simplify the process"],
+      ["犯错是学习的一部分", "mistakes are part of learning"],
+      ["一步一步来", "one step at a time"],
+      ["专注你能掌控的", "focus on what you can control"],
+      ["从失败中吸取教训", "learn from failure"],
+      ["我感到不堪重负", "i'm feeling overwhelmed"],
+      ["我需要暂停一下", "i need to pause for a moment"],
+      ["不要给我扣帽子", "don't label me"],
+      ["详细阐述你的观点", "elaborate on your point"],
+      ["每一天都是新的开始", "every day is a fresh start"],
+      ["失败并不可怕", "failure isn't scary"],
+      ["如果不采取措施", "if nothing is done"],
+      ["我也做不了什么", "there's nothing i can do"],
+      ["从痛苦中走出来", "get over the pain"],
+      ["很难感同身受", "it's hard to truly understand"],
+      ["捍卫你的底线", "stand up for your boundaries"],
+      ["从不往心里去", "never takes it personally"],
+      ["事教人一次足矣", "one lesson was enough"],
+      ["抽空陪陪家人", "make time for your family"],
+      ["珍惜生活中的小确幸", "cherish the little joys in life"],
+      ["而不是急于争辩", "instead of rushing to argue"],
+      ["每一秒钟都很关键", "every second matters"],
+      ["不能一概而论", "it depends"],
+      ["应该辩证地看", "take a balanced view"],
+      ["事情没那么简单", "it's not black and white"],
+      ["我不想谈论这个", "i'd rather not get into it"],
+      ["这没有商量余地", "this is non-negotiable"],
+      ["我的回答依然是\"不\"", "my answer is still no"],
+      ["听起来真的很难", "that sounds really tough"],
+      ["休息也是工作的一部分", "rest is part of the work"],
+      ["比较是快乐的小偷", "comparison is the thief of joy"],
+      ["真正的问题是什么", "what's the real issue here"],
+      ["聚焦解决方案，而非指责", "let's focus on solutions, not blame"],
+      ["我们有什么证据", "what evidence do we have"],
+      ["这是我的责任", "that's on me"],
+      ["今天就到这儿吧", "let's call it a day"],
+      ["这才对嘛", "that's the spirit"],
+      ["尽量多看他的长处", "focus on his strengths"],
+      ["你真的这么觉得吗", "do you really feel that way"],
+      ["我是不是哪里做错了", "did I do something wrong"],
+      ["这真的有必要吗", "Is this really necessary"],
+      ["你为什么", "why are you"],
+      ["你怎么", "how come you"],
+      ["我是不是应该", "am I supposed to"],
+      ["这事有点复杂", "it's kind of complicated"],
+      ["我还没想好呢", "I'm not sure yet"],
+      ["让我想想", "let me think about that"]
+    ];
+
+    // 状态管理
+    let state = {
+      cards: [],
+      currentIndex: 0,
+      starred: new Set(),
+      isViewingStarred: false,
+      originalOrder: [],
+      previousState: null,
+      zoomLevel: 1
+    };
+
+    // 构建卡片
+    function buildCards() {
+      const cards = [];
+      for (let i = 0; i < englishPhrases.length; i++) {
+        const [front, back] = englishPhrases[i];
+        cards.push({ text: front, type: 'zh', index: i });
+        cards.push({ text: back, type: 'en', index: i });
+      }
+      return cards;
+    }
+
+    // 更新卡片显示
+    function updateCard() {
+      if (state.cards.length === 0) {
+        document.getElementById('card-text').textContent = 'No cards available';
+        document.getElementById('progress').textContent = '0 / 0';
+        document.querySelector('.progress-fill').style.width = '0%';
+        return;
+      }
+
+      const card = state.cards[state.currentIndex];
+      document.getElementById('card-text').textContent = card.text;
+      
+      // 根据是否查看收藏来显示不同的总数
+      const totalCards = state.isViewingStarred ? state.cards.length : 550;
+      document.getElementById('progress').textContent = `${state.currentIndex + 1} / ${totalCards}`;
+      document.querySelector('.progress-fill').style.width = `${((state.currentIndex + 1) / state.cards.length) * 100}%`;
+      
+      const star = document.getElementById('star');
+      if (state.starred.has(card.index)) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
+    }
+
+    // 下一张卡片
+    function nextCard() {
+      if (state.cards.length === 0) return;
+      state.currentIndex = (state.currentIndex + 1) % state.cards.length;
+      updateCard();
+    }
+
+    // 上一张卡片
+    function prevCard() {
+      if (state.cards.length === 0) return;
+      state.currentIndex = (state.currentIndex - 1 + state.cards.length) % state.cards.length;
+      updateCard();
+    }
+
+    // 收藏/取消收藏
+    function toggleStar() {
+      const currentCard = state.cards[state.currentIndex];
+      
+      if (state.isViewingStarred) {
+        if (state.starred.has(currentCard.index)) {
+          state.starred.delete(currentCard.index);
+          
+          const newCards = [];
+          for (let i = 0; i < state.cards.length; i++) {
+            const card = state.cards[i];
+            if (state.starred.has(card.index)) {
+              newCards.push(card);
+            }
+          }
+          
+          state.cards = newCards;
+          
+          if (state.currentIndex >= state.cards.length) {
+            state.currentIndex = Math.max(0, state.cards.length - 1);
+          }
+          
+          if (state.cards.length === 0) {
+            resetCards();
+            return;
+          }
+          
+          updateCard();
+        }
+      } else {
+        if (!state.starred.has(currentCard.index)) {
+          state.starred.add(currentCard.index);
+          updateCard();
+        }
+      }
+    }
+
+    // 重置到原始顺序
+    function resetCards() {
+      state.isViewingStarred = false;
+      state.previousState = null;
+      state.cards = [...state.originalOrder];
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 随机排序
+    function shuffleCards() {
+      state.isViewingStarred = false;
+      state.previousState = null;
+      const shuffledPhrases = [...englishPhrases].sort(() => Math.random() - 0.5);
+      state.cards = [];
+      for (let i = 0; i < shuffledPhrases.length; i++) {
+        const [front, back] = shuffledPhrases[i];
+        state.cards.push({ text: front, type: 'zh', index: i });
+        state.cards.push({ text: back, type: 'en', index: i });
+      }
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 查看收藏
+    function viewStarred() {
+      if (state.starred.size === 0) {
+        alert('No starred items yet!');
+        return;
+      }
+      
+      state.previousState = {
+        cards: [...state.cards],
+        currentIndex: state.currentIndex,
+        isViewingStarred: state.isViewingStarred
+      };
+      
+      state.isViewingStarred = true;
+      
+      const newCards = [];
+      for (let i = 0; i < state.cards.length; i++) {
+        const card = state.cards[i];
+        if (state.starred.has(card.index)) {
+          newCards.push(card);
+        }
+      }
+      
+      state.cards = newCards;
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 处理卡片点击事件
+    function handleCardClick(event) {
+      const card = document.getElementById('card');
+      const rect = card.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const cardWidth = rect.width;
+      
+      if (clickX < cardWidth / 2) {
+        prevCard();
+      } else {
+        nextCard();
+      }
+    }
+
+    // 缩放功能
+    function setZoom(level) {
+      state.zoomLevel = Math.max(0.5, Math.min(2, level));
+      document.getElementById('appContainer').style.transform = `scale(${state.zoomLevel})`;
+      document.getElementById('zoomIndicator').textContent = `${Math.round(state.zoomLevel * 100)}%`;
+    }
+
+    function zoomIn() {
+      setZoom(state.zoomLevel + 0.1);
+    }
+
+    function zoomOut() {
+      setZoom(state.zoomLevel - 0.1);
+    }
+
+    // 初始化应用
+    function initApp() {
+      console.log('Initializing app...');
+      
+      // 初始化数据
+      state.cards = buildCards();
+      state.originalOrder = [...state.cards];
+      
+      console.log('实际卡片数量:', state.cards.length);
+      
+      // 绑定事件
+      document.getElementById('nextBtn').addEventListener('click', nextCard);
+      document.getElementById('prevBtn').addEventListener('click', prevCard);
+      document.getElementById('starBtn').addEventListener('click', toggleStar);
+      document.getElementById('resetBtn').addEventListener('click', resetCards);
+      document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
+      document.getElementById('bookmarksBtn').addEventListener('click', viewStarred);
+      document.getElementById('star').addEventListener('click', toggleStar);
+      document.getElementById('card').addEventListener('click', handleCardClick);
+      
+      // 缩放控制
+      document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
+      document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
+      
+      // 双指捏合缩放
+      let initialDistance = 0;
+      let initialZoom = 1;
+      
+      const handleTouchStart = (e) => {
+        if (e.touches.length === 2) {
+          initialDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          initialZoom = state.zoomLevel;
+        }
+      };
+      
+      const handleTouchMove = (e) => {
+        if (e.touches.length === 2) {
+          const currentDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          
+          if (initialDistance > 0) {
+            const scale = currentDistance / initialDistance;
+            const newZoom = initialZoom * scale;
+            setZoom(Math.max(0.5, Math.min(2, newZoom)));
+          }
+        }
+      };
+      
+      const handleTouchEnd = () => {
+        initialDistance = 0;
+      };
+      
+      const appContainer = document.getElementById('appContainer');
+      appContainer.addEventListener('touchstart', handleTouchStart);
+      appContainer.addEventListener('touchmove', handleTouchMove);
+      appContainer.addEventListener('touchend', handleTouchEnd);
+      
+      updateCard();
+      console.log('App initialized successfully!');
+    }
+
+    // 启动应用
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
